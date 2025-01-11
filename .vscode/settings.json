@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "vulkan_compute": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
