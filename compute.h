@@ -1,0 +1,2 @@
+
+int Compute(void);
