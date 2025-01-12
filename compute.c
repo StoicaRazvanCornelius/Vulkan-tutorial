@@ -1,19 +1,22 @@
 #include <vulkan/vulkan.h>
+#include <string.h>
 #include <stdio.h>
+#include "device.h"
+
 VkCommandBuffer CommandBuffer = VK_NULL_HANDLE;
 
 
 void PrepareCommandBuffer(void){
     VkCommandBufferAllocateInfo allocInfo;
     memset(&allocInfo, 0, sizeof(allocInfo));
-    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFOl;
-    allocInfo.commandPool = CommandPool;
+    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    allocInfo.commandPool = ComputeCmdPool;
     allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
     allocInfo.commandBufferCount = 1;
 
     if(vkAllocateCommandBuffers(LogicalDevice, &allocInfo, &CommandBuffer) != VK_SUCCESS)
     {
-        printf("Failed to allocate the buffer\n")
+        printf("Failed to allocate the buffer\n");
         return;
     }
 
@@ -36,6 +39,7 @@ void PrepareCommandBuffer(void){
     }
 
 }
+
 int Compute(void){
     
     VkSubmitInfo submitInfo;
