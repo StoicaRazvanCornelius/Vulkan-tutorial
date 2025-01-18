@@ -36,7 +36,7 @@ void PrepareCommandBuffer(void){
     vkCmdBindDescriptorSets(CommandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, PipelineLayout,
                             0, 1,  &DescriptorSet, 0, NULL);
 
-    vkCmdDispatch(CommandBuffer, 1, 1, 1);
+    vkCmdDispatch(CommandBuffer, 6, 1, 1);
 
     if(vkEndCommandBuffer(CommandBuffer) !=VK_SUCCESS){
         printf("Faild to end the buffer \n");
@@ -79,13 +79,16 @@ int Compute(void){
 
 void CreateDescriptorSet(void){
     CreateDescriptorPool();
+
     VkDescriptorSetAllocateInfo descriptorSetAllocInfo;
     memset(&descriptorSetAllocInfo, 0, sizeof(descriptorSetAllocInfo));
     descriptorSetAllocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+    descriptorSetAllocInfo.descriptorSetCount = 1;
     descriptorSetAllocInfo.pSetLayouts = &DescriptorSetLayout;
     descriptorSetAllocInfo.descriptorPool = DescriptorPool;
-    if(vkAllocateDescriptorSets(LogicalDevice, &descriptorSetAllocInfo, &DescriptorSet) != VK_SUCCESS){
-        printf("Failed to allocate the descriptor set\n");
-    }
 
+    if (vkAllocateDescriptorSets(LogicalDevice, &descriptorSetAllocInfo, &DescriptorSet) != VK_SUCCESS)
+    {
+        printf("Failed to allocate the descriptor set.");
+    }
 }

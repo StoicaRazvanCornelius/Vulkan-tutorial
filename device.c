@@ -76,19 +76,20 @@ void CreateCommandPool(void){
 void CreateDescriptorPool(void){
     
     VkDescriptorPoolSize descriptorPoolSize;
-    memset(&descriptorPoolSize, 0 , sizeof(descriptorPoolSize));
+    memset(&descriptorPoolSize, 0, sizeof(descriptorPoolSize));
     descriptorPoolSize.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
     descriptorPoolSize.descriptorCount = 2;
 
     VkDescriptorPoolCreateInfo descriptorPoolCreateInfo;
-    memset( &descriptorPoolCreateInfo, 0, sizeof(descriptorPoolCreateInfo));
+    memset(&descriptorPoolCreateInfo, 0, sizeof(descriptorPoolCreateInfo));
     descriptorPoolCreateInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
     descriptorPoolCreateInfo.maxSets = 1;
     descriptorPoolCreateInfo.pPoolSizes = &descriptorPoolSize;
     descriptorPoolCreateInfo.poolSizeCount = 1;
 
-    if(vkCreateDescriptorPool(LogicalDevice, &descriptorPoolCreateInfo, NULL, &DescriptorPool) != VK_SUCCESS){
-        printf("Failed to create descriptor pool\n");
+    if (vkCreateDescriptorPool(LogicalDevice, &descriptorPoolCreateInfo, NULL, &DescriptorPool) != VK_SUCCESS)
+    {
+        printf("Failed to create the descriptor pool.\n");
     }
 }
 

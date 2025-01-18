@@ -75,7 +75,7 @@ VkBuffer CreateBufferAndMemory(uint32_t size, VkDeviceMemory *deviceMemory){
 
 void CreateBuffers(uint32_t inputSize, uint32_t outputSize){
     InputBuffer = CreateBufferAndMemory(inputSize, &InputBufferMemory);
-    OutputBuffer = CreateBufferAndMemory(inputSize, &OutputBufferMemory);
+    OutputBuffer = CreateBufferAndMemory(outputSize, &OutputBufferMemory);
 
     VkDescriptorBufferInfo descriptorBuffers[2];
     descriptorBuffers[0].buffer = InputBuffer;
@@ -105,4 +105,26 @@ void DestroyBuffers(void){
     vkFreeMemory(LogicalDevice, OutputBufferMemory, NULL);
 }
 
- 
+void CopyToInputBuffer(void *data, uint32_t size){
+    void* address;
+    if(vkMapMemory(LogicalDevice, InputBufferMemory, 0, size, 0, &address) != VK_SUCCESS){
+        printf("Failed to map input buffer memory\n");
+        return;
+    }
+
+    memcpy(address, data, size);
+
+    vkUnmapMemory(LogicalDevice, InputBufferMemory);
+}
+
+void CopyFromOutputBuffer(void *data, uint32_t size){
+    void* address;
+    if(vkMapMemory(LogicalDevice, OutputBufferMemory, 0, size, 0, &address) != VK_SUCCESS){
+        printf("Failed to map output buffer memory\n");
+        return;
+    }
+
+    memcpy(data, address, size);
+
+    vkUnmapMemory(LogicalDevice, OutputBufferMemory);
+}
