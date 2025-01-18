@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
     CopyFromOutputBuffer(OutputData, sizeof(OutputData));
 
-    for(uint32_t i=0; i<1000; i+=50) printf( " InpuData[%d] = %d, OutputData[%d] = %f\n", i, InputData[i], i, OutputData[i]);
+    for(uint32_t i=0; i<1000; i++) printf( " InpuData[%d] = %d, OutputData[%d] = %f\n", i, InputData[i], i, OutputData[i]);
     
     DestroyPipeline();
     DestroyCommandPoolAndLogicalDevice();
