@@ -36,7 +36,7 @@ void PrepareCommandBuffer(void){
     vkCmdBindDescriptorSets(CommandBuffer, VK_PIPELINE_BIND_POINT_COMPUTE, PipelineLayout,
                             0, 1,  &DescriptorSet, 0, NULL);
 
-    vkCmdDispatch(CommandBuffer, 6, 1, 1);
+    vkCmdDispatch(CommandBuffer, 1000, 1, 1);
 
     if(vkEndCommandBuffer(CommandBuffer) !=VK_SUCCESS){
         printf("Faild to end the buffer \n");
