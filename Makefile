@@ -1,6 +1,6 @@
 
-HEADERS = compute.h device.h instance.h pipeline.h
-SOURCES = main.c compute.c device.c instance.c pipeline.c
+HEADERS = compute.h device.h instance.h pipeline.h memory.h
+SOURCES = main.c compute.c device.c instance.c pipeline.c memory.c
 TARGET = vulkan_compute 
 
 INCLUDES = -I 

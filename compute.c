@@ -1,8 +1,8 @@
-#include <vulkan/vulkan.h>
 #include <string.h>
 #include <stdio.h>
 #include "device.h"
 #include "pipeline.h"
+#include "compute.h"
 
 VkCommandBuffer CommandBuffer = VK_NULL_HANDLE;
 VkDescriptorSet DescriptorSet = VK_NULL_HANDLE;

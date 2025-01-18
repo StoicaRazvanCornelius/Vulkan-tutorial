@@ -1,5 +1,6 @@
 #include "device.h"
 #include "instance.h"
+#include "memory.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -84,7 +85,7 @@ void CreateDescriptorPool(void){
     descriptorPoolCreateInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
     descriptorPoolCreateInfo.maxSets = 1;
     descriptorPoolCreateInfo.pPoolSizes = &descriptorPoolSize;
-    descriptorPoolCreateInfo.pPoolSizes = 1;
+    descriptorPoolCreateInfo.poolSizeCount = 1;
 
     if(vkCreateDescriptorPool(LogicalDevice, &descriptorPoolCreateInfo, NULL, &DescriptorPool) != VK_SUCCESS){
         printf("Failed to create descriptor pool\n");
@@ -99,6 +100,8 @@ void DestroyCommandPoolAndLogicalDevice(void){
     if(DescriptorPool != VK_NULL_HANDLE){
         vkDestroyDescriptorPool(LogicalDevice, DescriptorPool, NULL);
     }
+
+    DestroyBuffers();
 
     if(LogicalDevice != VK_NULL_HANDLE){
         vkDestroyDevice(LogicalDevice, NULL);
